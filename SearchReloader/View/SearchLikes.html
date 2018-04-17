@@ -9,8 +9,16 @@
 <body>
     <div class="jumbotron">
         <h1 class="h1">Search using Car,Shoes and Clothing</h1>
+
+    </div>
+<div class="row">
+    <div class="col-md-7">
+        <label for="txtServerName">Host Pile</label>
+        <input type="text" class="form-control" id="txtServerName" aria-describedby="searchHelp" placeholder="Enter Local Host" />
+        <small id="searchHelp" class="form-text text-muted">Enter the Pipe after the colon you see on the URL example HTTP:LocalHost:6500 enter 6500</small>
     </div>
 
+</div>
 <div class="row">
  <div class="col-md-3" id="Ads">
 
@@ -48,8 +56,9 @@
 
     $('#btnSearch').click(function () {
         var category = $('#txtSearch').val();
-        var searchAPI = 'http://localhost:61500/api/SearchResult/GetSearch?category=' + category;
-        var similarSearch = 'http://localhost:61500/api/SimilarSearch/GetCoupon?category=' + category;
+        var ServerUrl = $('#txtServerName').val();
+        var searchAPI = 'http://localhost:' + ServerUrl + '/api/SearchResult/GetSearch?category=' + category;
+        var similarSearch = 'http://localhost:' + ServerUrl + '/api/SimilarSearch/GetCoupon?category=' + category;
         var searchResults = '';
         var ads = '';
         $.getJSON(searchAPI)
