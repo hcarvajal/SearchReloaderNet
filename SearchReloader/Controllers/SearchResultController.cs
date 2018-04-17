@@ -30,13 +30,33 @@ namespace SearchReloader.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetSearch(string category)
+        public async Task<IHttpActionResult> GetSearch(string category)
         {
             var searchResult = sresult.FirstOrDefault((p) => p.SearchKeyWord == category);
 
-            return Ok(searchResult);
+            bool updateAds = await UpdateSimilaritiesAsync(category);
+
+            return await Task.FromResult(Ok(searchResult));
         }
 
+
+        static Task<bool> UpdateSimilaritiesAsync(string keyword)
+        {
+            bool isUpdated = false;
+
+            try
+            {
+                isUpdated = true; 
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+
+
+            return Task.FromResult(isUpdated);
+
+
+        }
 
 
 
